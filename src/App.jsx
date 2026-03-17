@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useCategories } from './hooks/useCategories'
 import { useCategoryProducts } from './hooks/useCategoryProducts'
 import { useSearch } from './hooks/useSearch'
@@ -18,14 +18,8 @@ export default function App() {
 
   const { categories, isLoading: catsLoading } = useCategories()
 
-  const sharedCache = useRef(new Map())
   const { data, isLoading: productsLoading, error } = useCategoryProducts(selectedSubcategoryId)
-
-  if (data && selectedSubcategoryId) {
-    sharedCache.current.set(selectedSubcategoryId, { data, fetchedAt: Date.now() })
-  }
-
-  const { query, setQuery, results } = useSearch(sharedCache)
+  const { query, setQuery, results, isLoading: searchLoading } = useSearch()
 
   const handleViewChange = (view) => {
     setActiveView(view)
@@ -72,7 +66,7 @@ export default function App() {
           {activeView === 'shopping' && <ShoppingListPanel />}
           {activeView === 'browse' && (
             showSearch
-              ? <SearchResults query={query} results={results} />
+              ? <SearchResults query={query} results={results} isLoading={searchLoading} />
               : <ProductGrid data={data} isLoading={productsLoading} error={error} />
           )}
         </main>
