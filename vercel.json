@@ -1,12 +1,4 @@
 {
-  "functions": {
-    "api/[...path].js": {
-      "runtime": "nodejs20.x"
-    },
-    "api/test.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
