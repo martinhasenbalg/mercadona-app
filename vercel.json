@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://tienda.mercadona.es/api/:path*"
+      "destination": "/api/proxy/:path*"
     }
   ]
 }
