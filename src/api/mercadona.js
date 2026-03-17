@@ -1,4 +1,4 @@
-const BASE = import.meta.env.DEV ? '/api' : '/api/proxy'
+const BASE = '/api'
 
 export async function fetchCategories(signal) {
   const res = await fetch(`${BASE}/categories/`, { signal })
